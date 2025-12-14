@@ -1,7 +1,7 @@
 [project]
 name = "update-runner"
 version = "0.0.0"
-description = "Linuxで動作するOTA実行エンジン"
+description = "Linuxで動作するアプリ更新実行エンジン"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -13,12 +13,13 @@ tests = [
     "pytest",
 ]
 dev = [
+    "mypy",
     "ruff",
     "tox",
 ]
 
 [project.scripts]
-update_runner="update_runner.main:run"
+update_runner="update_runner.run"
 
 [build-system]
 requires = [
@@ -33,9 +34,6 @@ files = ["src"]
 show_error_codes = true
 pretty = true
 strict = true
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
 
 [tool.ruff]
 src = ["src"]
