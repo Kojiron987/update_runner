@@ -2,9 +2,9 @@
 
 ## 1. 概要
 
-OTA-Runner は IoT デバイス上で動作する軽量な OTA 実行エンジンであり、AWS IoT Jobs または Software Package Catalog と連携し、外部から受け取った OTA パッケージ（スクリプト + ファイル）を安全かつ確実に適用することを目的とする。
+Update-Runner は IoT デバイス上で動作する軽量な Update 実行エンジンであり、AWS IoT Jobs または Software Package Catalog と連携し、外部から受け取った Update パッケージ（スクリプト + ファイル）を安全かつ確実に適用することを目的とする。
 
-OTA-Runner は以下の特徴を持つ:
+Update-Runner は以下の特徴を持つ:
 
 Runner 本体は不変（更新しない）
 
@@ -17,15 +17,14 @@ Runner 本体は不変（更新しない）
 JSON-RPC over Unix Domain Socket による外部トリガ受付
 
 ## 2. システム構成
-/opt/ota-runner/
+/opt/update-runner/
   state.json
   active/
   staging/
   backup/
   logs/
-  ota.sock (UDS)
 
-## 3. OTA パッケージ仕様
+## 3. パッケージ仕様
 
 ### 3.1 ディレクトリ構造
 
@@ -104,13 +103,13 @@ verify / install は冪等性前提
 
 ### 6.1 UDS のパス
 
-/opt/ota-runner/ota.sock
+/run/update_runner/uds.sock
 
 ### 6.2 JSON-RPC メソッド
 
 #### 6.2.1 install
 
-OTA パッケージのインストールを開始する
+パッケージのインストールを開始する
 
 Request:
 
@@ -147,10 +146,6 @@ Result:
   "package_version": "1.0.0"
 }
 ```
-
-#### 6.2.3 cancel
-
-実行中の OTA をキャンセル（可能なら）
 
 ## 7. セーフティ
 
