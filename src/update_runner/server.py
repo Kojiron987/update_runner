@@ -1,4 +1,5 @@
 import json
+import os
 import socket
 import struct
 import threading
@@ -7,7 +8,11 @@ from typing import Any
 
 class JsonRpcServer:
     def __init__(self) -> None:
-        self._server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        if os.name == "posix":
+            self._server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        else:
+            # todo: skip windows environment
+            pass
         self._is_running = threading.Event()
         self._is_running.set()
 
