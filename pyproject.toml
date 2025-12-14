@@ -8,15 +8,15 @@ license-files = ["LICENSE"]
 maintainers = [{name = "kojiron"}]
 requires-python = ">=3.10"
 
-[dependency-groups]
+[project.optional-dependencies]
 tests = [
     "pytest",
 ]
 dev = [
     "ruff",
     "tox",
-    "tox-uv",
 ]
+
 [project.scripts]
 update_runner="update_runner.main:run"
 
